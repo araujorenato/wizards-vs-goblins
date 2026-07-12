@@ -1,0 +1,60 @@
+.enemy-card {
+  position: relative;
+  width: 108px;
+  height: 152px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-card-face);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.enemy-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.enemy-card--J {
+  background-image: url('/assets/goblin.png');
+}
+
+.enemy-card--Q {
+  background-image: url('/assets/guardian-goblin.png');
+}
+
+.enemy-card--K {
+  background-image: url('/assets/king-goblin.png');
+}
+
+.enemy-card__health {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-white);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.enemy-card__attack {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-white);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.enemy-card__suit {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  font-size: 1.2rem;
+  color: var(--color-text-dim);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}

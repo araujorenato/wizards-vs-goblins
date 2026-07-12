@@ -1,0 +1,98 @@
+.card {
+  position: relative;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  background: var(--color-card-face);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    filter 160ms ease;
+}
+
+.card--sm {
+  width: 44px;
+  height: 62px;
+}
+
+.card--md {
+  width: 74px;
+  height: 104px;
+}
+
+.card--lg {
+  width: 108px;
+  height: 152px;
+}
+
+.card--back {
+  background: var(--color-card-back) url('/assets/deck-cover.png') center / cover no-repeat;
+  border-color: var(--color-border);
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  border-color: var(--color-border-strong);
+  filter: brightness(1.1);
+}
+
+.card--interactive:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.card--selected,
+.card--raised {
+  transform: translateY(-14px);
+  border-color: var(--color-white);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.card--dimmed {
+  opacity: 0.45;
+}
+
+.card__corner {
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--color-white);
+}
+
+.card__corner--bottom {
+  left: auto;
+  top: auto;
+  right: 6px;
+  bottom: 4px;
+  transform: rotate(180deg);
+}
+
+.card__corner--red {
+  color: var(--color-text-dim);
+}
+
+.card__suit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--color-white);
+}
+
+.card--lg .card__suit {
+  font-size: 2.4rem;
+}
+
+.card__suit--red {
+  color: var(--color-text-dim);
+}

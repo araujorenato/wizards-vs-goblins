@@ -1,0 +1,52 @@
+.board {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.board__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr 340px;
+  grid-template-rows: 1fr;
+  gap: var(--space-5);
+  padding: 0 var(--space-5) var(--space-5);
+  align-items: stretch;
+  min-height: 0;
+}
+
+.board__piles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-5);
+}
+
+.board__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+}
+
+.board__hand-dock {
+  margin-top: auto;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board__side {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-5);
+  min-height: 0;
+}
+
+.board__side .game-log {
+  flex: 1;
+  min-height: 0;
+}

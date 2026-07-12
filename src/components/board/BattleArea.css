@@ -1,0 +1,21 @@
+.battle-area {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  padding: var(--space-2) 0;
+}
+
+.battle-area__group {
+  display: flex;
+}
+
+.battle-area__group .card {
+  margin-left: -14px;
+}
+
+.battle-area__group .card:first-child {
+  margin-left: 0;
+}

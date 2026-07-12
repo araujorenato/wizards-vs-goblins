@@ -1,0 +1,33 @@
+.castle-area {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.castle-area__stack {
+  position: relative;
+  width: 108px;
+  height: 152px;
+}
+
+.castle-area__back {
+  position: absolute;
+  inset: 0;
+}
+
+.castle-area__back:nth-child(1) {
+  transform: translate(10px, -10px) rotate(3deg);
+}
+
+.castle-area__back:nth-child(2) {
+  transform: translate(-8px, -6px) rotate(-2deg);
+}
+
+.castle-area__back:nth-child(3) {
+  transform: translate(4px, -14px) rotate(1deg);
+}
+
+.castle-area__enemy-wrap {
+  position: absolute;
+  inset: 0;
+}

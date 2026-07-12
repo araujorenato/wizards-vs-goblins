@@ -1,0 +1,92 @@
+:root {
+  --color-bg: #0a0a0a;
+  --color-bg-raised: #141414;
+  --color-panel: #101010;
+  --color-card-face: #1c1c1c;
+  --color-card-back: #050505;
+  --color-border: #3a3a3a;
+  --color-border-strong: #8a8a8a;
+  --color-text: #e8e8e8;
+  --color-text-dim: #9a9a9a;
+  --color-text-faint: #6a6a6a;
+  --color-white: #f5f5f5;
+  --color-black: #000000;
+
+  --font-display: 'Pirata One', 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --radius-card: 10px;
+  --radius-md: 6px;
+
+  /* Native size (viewBox 89x48) of public/assets/logo.svg — the in-game
+     header uses this as-is; the start-menu logo scales up from it. */
+  --logo-width: 89px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /*
+    Animation durations — the single place to tweak game animation speed.
+    JS choreography (src/components/board/Board.tsx) reads these same
+    variables via getAnimDurationMs() so timings never drift out of sync
+    with the CSS transitions/keyframes that use them.
+  */
+  --anim-card-fly-duration: 2s; /* battle cards -> discard, enemy card -> deck/discard, discard payment -> discard */
+  --anim-draw-duration: 2s; /* new cards entering the hand */
+  --anim-flip-duration: 1.2s; /* next-enemy reveal flip */
+  --anim-health-countdown-duration: 0.8s; /* enemy health/attack ticking down 1-by-1 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg) url('/assets/game-background.png') center / cover no-repeat fixed;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

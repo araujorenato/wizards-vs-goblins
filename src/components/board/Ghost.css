@@ -1,0 +1,24 @@
+.ghost {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  transition:
+    transform var(--anim-card-fly-duration, 2s) ease,
+    opacity var(--anim-card-fly-duration, 2s) ease;
+  will-change: transform, opacity;
+}
+
+/* Sized from its own content (not the collapsed live battle-area rect) and
+   forced to a single row so the played cards keep their horizontal
+   arrangement as they fly to the discard pile. */
+.ghost--battle {
+  width: max-content;
+}
+
+.ghost--battle .battle-area {
+  min-height: 0;
+  flex-wrap: nowrap;
+  padding: 0;
+}

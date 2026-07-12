@@ -1,0 +1,9 @@
+/*
+  Shared breakpoints used across component stylesheets (no CSS custom
+  properties inside @media conditions, so these are kept here as reference
+  and duplicated literally in each component's media queries):
+
+    desktop : >= 1024px  -- 3-column layout (Spells/Used | Castle+Hand | Log)
+    tablet  : 600px - 1023px -- 2-column, Log becomes a drawer
+    mobile  : < 600px -- single column, sticky action bar, bottom-sheet log
+*/
