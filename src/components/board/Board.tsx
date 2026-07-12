@@ -99,6 +99,7 @@ export function Board({ onMenu }: { onMenu: () => void }) {
   const { state, dispatch } = useGame()
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [sortMode, setSortMode] = useState<HandSortMode>('suit')
+  const [logOpen, setLogOpen] = useState(false)
 
   const battleAreaRef = useRef<HTMLDivElement>(null)
   const discardPileRef = useRef<HTMLDivElement>(null)
@@ -283,62 +284,89 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
   return (
     <div className="board">
-      <Header seed={state.seed} onMenu={onMenu} />
+      <Header seed={state.seed} onMenu={onMenu} onOpenLog={() => setLogOpen(true)} />
       <div className="board__grid">
         <aside className="board__piles">
-          <SpellsDeck ref={spellsDeckRef} count={spellsDeckCount(state)} />
-          <DiscardPile ref={discardPileRef} state={state} />
-          <ProtectionDots
-            charges={state.protectionCharges}
-            canUse={isPlaying && (state.phase === 'awaiting_action' || isDefense)}
-            onUse={handleProtection}
-          />
+          <div className="board__area-spells">
+            <SpellsDeck ref={spellsDeckRef} count={spellsDeckCount(state)} />
+          </div>
+          <div className="board__area-discard">
+            <DiscardPile ref={discardPileRef} state={state} />
+          </div>
+          <div className="board__area-protection">
+            <ProtectionDots
+              charges={state.protectionCharges}
+              canUse={isPlaying && (state.phase === 'awaiting_action' || isDefense)}
+              onUse={handleProtection}
+            />
+          </div>
         </aside>
 
         <section className="board__center">
-          <CastleArea
-            state={state}
-            enemyCardRef={enemyCardRef}
-            frozenEnemy={frozenEnemy}
-            hideEnemy={hideEnemySlot}
-            flipTrigger={flipTrigger}
-          />
-          <TurnBanner
-            state={state}
-            errorText={
-              isOverDiscarding
-                ? `You only need ${amountRequired} — you have ${selectedTotal}. Remove a spell.`
-                : undefined
-            }
-          />
-          <BattleArea ref={battleAreaRef} groups={state.battleArea} />
+          <div className="board__area-castle">
+            <CastleArea
+              state={state}
+              enemyCardRef={enemyCardRef}
+              frozenEnemy={frozenEnemy}
+              hideEnemy={hideEnemySlot}
+              flipTrigger={flipTrigger}
+            />
+          </div>
+          <div className="board__area-turn">
+            <TurnBanner
+              state={state}
+              errorText={
+                isOverDiscarding
+                  ? `You only need ${amountRequired} — you have ${selectedTotal}. Remove a spell.`
+                  : undefined
+              }
+            />
+          </div>
+          <div className="board__area-battle">
+            <BattleArea ref={battleAreaRef} groups={state.battleArea} />
+          </div>
 
           <div className="board__hand-dock">
-            <HandSortToggle mode={sortMode} onToggle={() => setSortMode((m) => (m === 'suit' ? 'rank' : 'suit'))} />
-            <Hand
-              cards={sortedHand}
-              selectedIds={selectedIds}
-              onToggle={toggleCard}
-              disabled={!isPlaying}
-              registerSlotRef={registerHandSlotRef}
-            />
-            {isPlaying &&
-              (isDefense ? (
-                <ActionBar
-                  mode="defense"
-                  selectedTotal={selectedTotal}
-                  amountRequired={amountRequired}
-                  canConfirm={selectedTotal >= amountRequired && !isOverDiscarding}
-                  onConfirm={handleConfirmDefense}
+            <div className="board__area-sort">
+              <HandSortToggle mode={sortMode} onToggle={() => setSortMode((m) => (m === 'suit' ? 'rank' : 'suit'))} />
+              <div className="board__area-protection-compact">
+                <ProtectionDots
+                  compact
+                  charges={state.protectionCharges}
+                  canUse={isPlaying && (state.phase === 'awaiting_action' || isDefense)}
+                  onUse={handleProtection}
                 />
-              ) : (
-                <ActionBar
-                  mode="attack"
-                  canAttack={Boolean(legalPlay?.valid)}
-                  onAttack={handleAttack}
-                  onYield={handleYield}
-                />
-              ))}
+              </div>
+            </div>
+            <div className="board__area-hand">
+              <Hand
+                cards={sortedHand}
+                selectedIds={selectedIds}
+                onToggle={toggleCard}
+                disabled={!isPlaying}
+                registerSlotRef={registerHandSlotRef}
+              />
+            </div>
+            {isPlaying && (
+              <div className="board__area-actions">
+                {isDefense ? (
+                  <ActionBar
+                    mode="defense"
+                    selectedTotal={selectedTotal}
+                    amountRequired={amountRequired}
+                    canConfirm={selectedTotal >= amountRequired && !isOverDiscarding}
+                    onConfirm={handleConfirmDefense}
+                  />
+                ) : (
+                  <ActionBar
+                    mode="attack"
+                    canAttack={Boolean(legalPlay?.valid)}
+                    onAttack={handleAttack}
+                    onYield={handleYield}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </section>
 
@@ -346,6 +374,17 @@ export function Board({ onMenu }: { onMenu: () => void }) {
           <GameLog log={state.log} />
         </aside>
       </div>
+
+      {logOpen && (
+        <div className="log-modal-overlay" onClick={() => setLogOpen(false)}>
+          <div className="log-modal" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="log-modal__close" onClick={() => setLogOpen(false)} aria-label="Close log">
+              ✕
+            </button>
+            <GameLog log={state.log} />
+          </div>
+        </div>
+      )}
 
       {battleGhost && (
         <div className="ghost ghost--battle" style={battleGhostStyle(battleGhost, 0.6)}>

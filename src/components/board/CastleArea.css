@@ -31,3 +31,9 @@
   position: absolute;
   inset: 0;
 }
+
+@media (max-width: 599px) {
+  .castle-area {
+    padding: var(--space-2) 0;
+  }
+}

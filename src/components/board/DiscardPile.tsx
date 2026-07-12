@@ -14,7 +14,7 @@ export const DiscardPile = forwardRef<HTMLDivElement, DiscardPileProps>(function
   return (
     <div className="pile">
       <div className="pile__label">
-        Used <span className="pile__count">{state.discardPile.length}</span>
+        Discard <span className="pile__count">{state.discardPile.length}</span>
       </div>
       <div className="pile__stack" ref={ref}>
         {top ? <Card card={top} size="lg" /> : <Card faceDown size="lg" dimmed />}

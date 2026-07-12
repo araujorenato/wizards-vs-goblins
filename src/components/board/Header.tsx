@@ -4,9 +4,10 @@ import './Header.css'
 interface HeaderProps {
   seed: string
   onMenu: () => void
+  onOpenLog: () => void
 }
 
-export function Header({ seed, onMenu }: HeaderProps) {
+export function Header({ seed, onMenu, onOpenLog }: HeaderProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -30,6 +31,9 @@ export function Header({ seed, onMenu }: HeaderProps) {
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
+      <button type="button" className="header__log-button" onClick={onOpenLog} aria-label="Open game log">
+        Log
+      </button>
     </header>
   )
 }

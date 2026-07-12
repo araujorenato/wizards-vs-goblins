@@ -9,10 +9,9 @@
   font-family: var(--font-display);
   font-size: 1.3rem;
   color: var(--color-white);
-  border: 1px solid var(--color-border);
-  padding: var(--space-2) var(--space-5);
-  border-radius: var(--radius-md);
-  background: var(--color-bg-raised);
+  border: none;
+  padding: var(--space-2) var(--space-6);
+  background-image: linear-gradient(to right, transparent 0%, var(--color-border) 20%, var(--color-border) 80%, transparent 100%);
   opacity: 0;
   transition: opacity 600ms ease;
 }
@@ -26,4 +25,21 @@
   border-style: dashed;
   font-family: var(--font-body);
   font-size: 1rem;
+}
+
+@media (max-width: 599px) {
+  .turn-banner {
+    min-height: 36px;
+    padding: var(--space-2) 0;
+  }
+
+  .turn-banner__text {
+    font-size: 1rem;
+    padding: var(--space-1) var(--space-3);
+    text-align: center;
+  }
+
+  .turn-banner__text--error {
+    font-size: 0.85rem;
+  }
 }

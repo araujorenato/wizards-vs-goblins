@@ -1,5 +1,6 @@
 .board {
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -49,4 +50,134 @@
 .board__side .game-log {
   flex: 1;
   min-height: 0;
+}
+
+.board__area-protection-compact {
+  display: none;
+}
+
+/*
+  Mobile: reflow the same components into a single-column layout via named
+  grid areas. The desktop wrapper elements (board__piles/board__center/
+  board__hand-dock) are turned into `display: contents` so their children
+  are promoted to direct children of board__grid and can be freely placed —
+  no DOM restructuring needed between breakpoints.
+*/
+@media (max-width: 599px) {
+  .board__grid {
+    grid-template-columns: 64px 1fr 64px;
+    grid-template-rows: auto auto 1fr auto auto auto;
+    grid-template-areas:
+      'spells castle discard'
+      'turn turn turn'
+      'battle battle battle'
+      'sort sort sort'
+      'hand hand hand'
+      'actions actions actions';
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3) var(--space-3);
+  }
+
+  .board__piles,
+  .board__center,
+  .board__hand-dock {
+    display: contents;
+  }
+
+  .board__area-spells {
+    grid-area: spells;
+    display: flex;
+    justify-content: center;
+    align-self: start;
+  }
+
+  .board__area-discard {
+    grid-area: discard;
+    display: flex;
+    justify-content: center;
+    align-self: start;
+  }
+
+  .board__area-castle {
+    grid-area: castle;
+  }
+
+  .board__area-turn {
+    grid-area: turn;
+  }
+
+  .board__area-battle {
+    grid-area: battle;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .board__area-sort {
+    grid-area: sort;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .board__area-protection {
+    display: none;
+  }
+
+  .board__area-protection-compact {
+    display: flex;
+  }
+
+  .board__area-hand {
+    grid-area: hand;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .board__area-actions {
+    grid-area: actions;
+  }
+
+  .board__side {
+    display: none;
+  }
+}
+
+.log-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: var(--space-5);
+}
+
+.log-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(70vh, 70dvh);
+  display: flex;
+}
+
+.log-modal .game-log {
+  width: 100%;
+}
+
+.log-modal__close {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  z-index: 1;
 }

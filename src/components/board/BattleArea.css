@@ -19,3 +19,11 @@
 .battle-area__group .card:first-child {
   margin-left: 0;
 }
+
+@media (max-width: 599px) {
+  .battle-area {
+    min-height: 48px;
+    gap: var(--space-3);
+    padding: var(--space-1) 0;
+  }
+}

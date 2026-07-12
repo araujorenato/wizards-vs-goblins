@@ -37,7 +37,8 @@
 }
 
 .action-bar__secondary {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   padding: var(--space-2);
   background: transparent;
   color: var(--color-text-dim);
@@ -48,4 +49,17 @@
 .action-bar__secondary:hover {
   color: var(--color-white);
   border-color: var(--color-border-strong);
+}
+
+@media (max-width: 599px) {
+  .action-bar {
+    min-width: 0;
+    width: 100%;
+    padding: var(--space-2) var(--space-4) 0;
+  }
+
+  .action-bar__primary {
+    font-size: 1.15rem;
+    padding: var(--space-2);
+  }
 }

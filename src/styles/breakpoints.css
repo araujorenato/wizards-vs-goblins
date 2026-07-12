@@ -3,7 +3,14 @@
   properties inside @media conditions, so these are kept here as reference
   and duplicated literally in each component's media queries):
 
-    desktop : >= 1024px  -- 3-column layout (Spells/Used | Castle+Hand | Log)
-    tablet  : 600px - 1023px -- 2-column, Log becomes a drawer
-    mobile  : < 600px -- single column, sticky action bar, bottom-sheet log
+    desktop : >= 600px  -- 3-column layout (Spells/Used/Protection | Castle+Hand | Log)
+    mobile  : < 600px -- single-column grid: Spells/Castle/Discard flank each
+              other in a top row below the logo, Protection sits left of the
+              Hand in a bottom row, and the Log becomes a header button that
+              opens a modal (board__piles/board__center/board__hand-dock
+              switch to display:contents so their children can be freely
+              placed via grid-area without touching the DOM structure).
+
+  Tablet-specific layout is not implemented yet; tablet widths currently
+  fall back to the desktop layout.
 */
