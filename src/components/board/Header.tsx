@@ -5,9 +5,10 @@ interface HeaderProps {
   seed: string
   onMenu: () => void
   onOpenLog: () => void
+  onOpenRules: () => void
 }
 
-export function Header({ seed, onMenu, onOpenLog }: HeaderProps) {
+export function Header({ seed, onMenu, onOpenLog, onOpenRules }: HeaderProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -22,9 +23,14 @@ export function Header({ seed, onMenu, onOpenLog }: HeaderProps) {
 
   return (
     <header className="header">
-      <button type="button" className="header__logo" onClick={onMenu} aria-label="Open menu">
-        <img src="/assets/logo.svg" alt="Regicide" className="header__logo-img" />
-      </button>
+      <div className="header__brand">
+        <button type="button" className="header__logo" onClick={onMenu} aria-label="Open menu">
+          <img src="/assets/logo.svg" alt="Regicide" className="header__logo-img" />
+        </button>
+        <button type="button" className="header__rules-button" onClick={onOpenRules} aria-label="Open rules">
+          Rules
+        </button>
+      </div>
       <div className="header__seed">
         <span className="header__seed-text">Seed: {seed}</span>
         <button type="button" className="header__copy" onClick={handleCopy}>

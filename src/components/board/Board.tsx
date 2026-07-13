@@ -18,6 +18,7 @@ import { Hand } from './Hand'
 import { HandSortToggle } from './HandSortToggle'
 import { Header } from './Header'
 import { ProtectionDots } from './ProtectionDots'
+import { RulesModal } from './RulesModal'
 import { SpellsDeck } from './SpellsDeck'
 import { TurnBanner } from './TurnBanner'
 import { WinLoseOverlay } from './WinLoseOverlay'
@@ -100,6 +101,7 @@ export function Board({ onMenu }: { onMenu: () => void }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [sortMode, setSortMode] = useState<HandSortMode>('suit')
   const [logOpen, setLogOpen] = useState(false)
+  const [rulesOpen, setRulesOpen] = useState(false)
 
   const battleAreaRef = useRef<HTMLDivElement>(null)
   const discardPileRef = useRef<HTMLDivElement>(null)
@@ -284,7 +286,12 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
   return (
     <div className="board">
-      <Header seed={state.seed} onMenu={onMenu} onOpenLog={() => setLogOpen(true)} />
+      <Header
+        seed={state.seed}
+        onMenu={onMenu}
+        onOpenLog={() => setLogOpen(true)}
+        onOpenRules={() => setRulesOpen(true)}
+      />
       <div className="board__grid">
         <aside className="board__piles">
           <div className="board__area-spells">
@@ -382,6 +389,22 @@ export function Board({ onMenu }: { onMenu: () => void }) {
               ✕
             </button>
             <GameLog log={state.log} />
+          </div>
+        </div>
+      )}
+
+      {rulesOpen && (
+        <div className="log-modal-overlay" onClick={() => setRulesOpen(false)}>
+          <div className="log-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="log-modal__close"
+              onClick={() => setRulesOpen(false)}
+              aria-label="Close rules"
+            >
+              ✕
+            </button>
+            <RulesModal />
           </div>
         </div>
       )}

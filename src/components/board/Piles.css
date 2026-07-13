@@ -51,7 +51,8 @@
 
   .board__area-spells .card--lg .card__suit,
   .board__area-discard .card--lg .card__suit {
-    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
   }
 
   .board__area-spells .card--lg .card__corner,

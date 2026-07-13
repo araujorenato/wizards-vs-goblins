@@ -1,4 +1,4 @@
-import { SUIT_SYMBOLS } from '../../game/format'
+import { SUIT_ICONS } from '../../game/format'
 import type { EnemyInPlay } from '../../game/types'
 import { getAnimDurationMs } from './animationUtils'
 import { useCountdown } from './useCountdown'
@@ -22,7 +22,7 @@ export function EnemyCard({ enemy, remainingHealth, effectiveAttack }: EnemyCard
       aria-label={`Enemy: ${remainingHealth} health, ${effectiveAttack} attack`}
     >
       <span className="enemy-card__health">{displayHealth}</span>
-      <span className="enemy-card__suit">{SUIT_SYMBOLS[enemy.card.suit]}</span>
+      <img className="enemy-card__suit" src={SUIT_ICONS[enemy.card.suit]} alt={enemy.card.suit} />
       <span className="enemy-card__attack">{displayAttack}</span>
     </div>
   )

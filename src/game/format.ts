@@ -7,6 +7,13 @@ export const SUIT_SYMBOLS: Record<Suit, string> = {
   clubs: '♣',
 }
 
+export const SUIT_ICONS: Record<Suit, string> = {
+  diamonds: '/assets/suits/scroll.svg',
+  hearts: '/assets/suits/potion.svg',
+  spades: '/assets/suits/counter.svg',
+  clubs: '/assets/suits/missile.svg',
+}
+
 export function formatCard(card: Card): string {
   return `${card.rank}${SUIT_SYMBOLS[card.suit]}`
 }

@@ -57,6 +57,35 @@
   opacity: 0.45;
 }
 
+.card--enemy {
+  background-size: cover;
+  background-position: center;
+}
+
+.card--enemy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.card--enemy-J {
+  background-image: url('/assets/goblin.png');
+}
+
+.card--enemy-Q {
+  background-image: url('/assets/guardian-goblin.png');
+}
+
+.card--enemy-K {
+  background-image: url('/assets/king-goblin.png');
+}
+
+.card--enemy .card__corner {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
 .card__corner {
   position: absolute;
   left: 6px;
@@ -82,17 +111,13 @@
 .card__suit {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  color: var(--color-white);
+  margin: auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
 }
 
 .card--lg .card__suit {
-  font-size: 2.4rem;
-}
-
-.card__suit--red {
-  color: var(--color-text-dim);
+  width: 2.4rem;
+  height: 2.4rem;
 }
