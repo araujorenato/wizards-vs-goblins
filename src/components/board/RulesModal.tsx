@@ -34,7 +34,7 @@ export function RulesModal() {
           <p>You have 2 protection charges: they discard and refill your hand, before your turn or before damage.</p>
         </section>
         <section className="rules-modal__section">
-          <h3 className="rules-modal__heading">Suits</h3>
+          <h3 className="rules-modal__heading">Suits and effects</h3>
           <ul className="rules-modal__suits">
             {SUIT_INFO.map(({ suit, name, effect }) => (
               <li key={suit} className="rules-modal__suit">
@@ -47,12 +47,19 @@ export function RulesModal() {
             ))}
           </ul>
         </section>
-        <section className="rules-modal__section rules-modal__attribution">
+        <section className="rules-modal__section">
+          <h3 className="rules-modal__heading">Suit immunity</h3>
           <p>
-            Inspired by the mechanics of Regicide, a card game created by Paul Abrahams, Luke Badger, and Andy
-            Richdale, and published by Badgers From Mars. This is an independent, unofficial project.
+            Each enemy is immune to its own suit: if you attack with cards of that suit, the suit's special effect
+            is nullified — the attack value is still dealt as damage, just without the bonus.
           </p>
         </section>
+      </div>
+      <div className="rules-modal__attribution">
+        <p>
+          Inspired by the mechanics of Regicide, a card game created by Paul Abrahams, Luke Badger, and Andy
+          Richdale, and published by Badgers From Mars. This is an independent, unofficial project.
+        </p>
       </div>
     </div>
   )
