@@ -14,7 +14,7 @@ export function StartScreen({ onStart, onResume }: StartScreenProps) {
   return (
     <div className="start-screen">
       <img src="/assets/logo.svg" alt="Regicide" className="start-screen__logo" />
-      <p className="start-screen__subtitle">A cooperative battle against the Goblin Kingdom</p>
+      <p className="start-screen__subtitle">A solo battle against the Goblin Kingdom</p>
 
       <div className="start-screen__actions">
         {savedGame && savedGame.status === 'playing' && (
