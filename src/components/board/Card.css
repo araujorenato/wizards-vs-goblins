@@ -57,12 +57,20 @@
   opacity: 0.45;
 }
 
-.card--enemy {
+.card--enemy,
+.card--suit-hearts,
+.card--suit-diamonds,
+.card--suit-clubs,
+.card--suit-spades {
   background-size: cover;
   background-position: center;
 }
 
-.card--enemy::before {
+.card--enemy::before,
+.card--suit-hearts::before,
+.card--suit-diamonds::before,
+.card--suit-clubs::before,
+.card--suit-spades::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -82,7 +90,27 @@
   background-image: url('/assets/king-goblin.png');
 }
 
-.card--enemy .card__corner {
+.card--suit-hearts {
+  background-image: url('/assets/deck-images/hearts.png');
+}
+
+.card--suit-diamonds {
+  background-image: url('/assets/deck-images/diamonds.png');
+}
+
+.card--suit-clubs {
+  background-image: url('/assets/deck-images/clubs.png');
+}
+
+.card--suit-spades {
+  background-image: url('/assets/deck-images/spades.png');
+}
+
+.card--enemy .card__corner,
+.card--suit-hearts .card__corner,
+.card--suit-diamonds .card__corner,
+.card--suit-clubs .card__corner,
+.card--suit-spades .card__corner {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 

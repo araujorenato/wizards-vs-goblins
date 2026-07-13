@@ -41,6 +41,7 @@ export function Card({
     `card--${size}`,
     isBack ? 'card--back' : 'card--face',
     isEnemyOrigin ? `card--enemy card--enemy-${card!.rank}` : '',
+    !isBack && !isEnemyOrigin && card ? `card--suit-${card.suit}` : '',
     selected ? 'card--selected' : '',
     raised ? 'card--raised' : '',
     dimmed ? 'card--dimmed' : '',
