@@ -409,7 +409,7 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
       {logOpen && (
         <div className="log-modal-overlay" onClick={() => setLogOpen(false)}>
-          <div className="log-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="log-modal log-modal--log" onClick={(e) => e.stopPropagation()}>
             <button type="button" className="log-modal__close" onClick={() => setLogOpen(false)} aria-label="Close log">
               ✕
             </button>

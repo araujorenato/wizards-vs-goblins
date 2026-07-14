@@ -181,3 +181,9 @@
   font-size: 0.9rem;
   z-index: 1;
 }
+
+@media (max-width: 599px) {
+  .log-modal--log {
+    max-height: 600px;
+  }
+}
