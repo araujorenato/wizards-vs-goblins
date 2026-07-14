@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Board } from './components/board/Board'
 import { StartScreen } from './components/start/StartScreen'
 import { GameProvider, useGame } from './state/GameContext'
+import { trackEvent } from './lib/analytics'
 import { loadGame } from './state/persistence'
 
 type Screen = 'start' | 'board'
@@ -14,6 +15,7 @@ function AppInner() {
     return (
       <StartScreen
         onStart={(seed) => {
+          trackEvent('new_game')
           dispatch({ type: 'START_GAME', seed })
           setScreen('board')
         }}

@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react'
 import type { GameState } from '../../game/types'
+import { trackEvent } from '../../lib/analytics'
 import './WinLoseOverlay.css'
 
 interface WinLoseOverlayProps {
@@ -7,6 +9,19 @@ interface WinLoseOverlayProps {
 }
 
 export function WinLoseOverlay({ state, onNewGame }: WinLoseOverlayProps) {
+  const trackedStatus = useRef<GameState['status'] | null>(null)
+
+  useEffect(() => {
+    if (state.status === trackedStatus.current) return
+    trackedStatus.current = state.status
+
+    if (state.status === 'lost') {
+      trackEvent('game_lost')
+    } else if (state.status === 'won') {
+      trackEvent('game_won', { tier: state.victoryTier })
+    }
+  }, [state.status, state.victoryTier])
+
   if (state.status === 'playing') return null
 
   const isWin = state.status === 'won'
