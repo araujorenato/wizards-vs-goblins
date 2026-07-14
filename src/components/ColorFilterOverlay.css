@@ -1,0 +1,7 @@
+.color-filter-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 9999;
+}

@@ -5,9 +5,10 @@ import './StartScreen.css'
 interface StartScreenProps {
   onStart: (seed?: string) => void
   onResume: () => void
+  onChangeColor: () => void
 }
 
-export function StartScreen({ onStart, onResume }: StartScreenProps) {
+export function StartScreen({ onStart, onResume, onChangeColor }: StartScreenProps) {
   const [seedInput, setSeedInput] = useState('')
   const savedGame = loadGame()
 
@@ -51,6 +52,10 @@ export function StartScreen({ onStart, onResume }: StartScreenProps) {
               </button>
             </div>
           </form>
+
+          <button type="button" className="start-screen__secondary" onClick={onChangeColor}>
+            Change Color
+          </button>
         </div>
       </div>
 

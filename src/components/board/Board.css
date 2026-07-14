@@ -138,6 +138,7 @@
 
   .board__area-actions {
     grid-area: actions;
+    margin-bottom: var(--space-6);
   }
 
   .board__side {
