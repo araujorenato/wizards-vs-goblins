@@ -22,3 +22,11 @@
   flex-wrap: nowrap;
   padding: 0;
 }
+
+/* Hand card -> battle area, on attack: quicker and easing both ends, since
+   this is a direct player action rather than a scripted reveal sequence. */
+.ghost--play {
+  transition:
+    transform var(--anim-card-play-duration, .4s) ease-in-out,
+    opacity var(--anim-card-play-duration, .4s) ease-in-out;
+}

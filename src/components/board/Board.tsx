@@ -45,7 +45,9 @@ interface EnemyGhost {
   phase: 'start' | 'end'
 }
 
-interface DiscardGhost {
+/** A single card flying from one on-screen spot to another (discard payment,
+ * or a played card heading to the battle area). */
+interface CardGhost {
   card: CardModel
   start: Rect
   end: Rect
@@ -117,18 +119,27 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
   const [battleGhost, setBattleGhost] = useState<BattleGhost | null>(null)
   const [enemyGhost, setEnemyGhost] = useState<EnemyGhost | null>(null)
-  const [discardGhosts, setDiscardGhosts] = useState<DiscardGhost[]>([])
+  const [discardGhosts, setDiscardGhosts] = useState<CardGhost[]>([])
+  const [playGhosts, setPlayGhosts] = useState<CardGhost[]>([])
   const [frozenEnemy, setFrozenEnemy] = useState<FrozenEnemyDisplay | null>(null)
   const [hideEnemySlot, setHideEnemySlot] = useState(false)
   const [isAnimatingDefeat, setIsAnimatingDefeat] = useState(false)
   const [flipTrigger, setFlipTrigger] = useState(0)
 
-  async function animateDiscardGhosts(ghosts: DiscardGhost[]) {
+  async function animateDiscardGhosts(ghosts: CardGhost[]) {
     setDiscardGhosts(ghosts)
     await nextFrame()
     setDiscardGhosts((prev) => prev.map((g) => ({ ...g, phase: 'end' })))
     await sleep(getAnimDurationMs('--anim-card-fly-duration', 2000))
     setDiscardGhosts([])
+  }
+
+  async function animatePlayGhosts(ghosts: CardGhost[]) {
+    setPlayGhosts(ghosts)
+    await nextFrame()
+    setPlayGhosts((prev) => prev.map((g) => ({ ...g, phase: 'end' })))
+    await sleep(getAnimDurationMs('--anim-card-play-duration', 400))
+    setPlayGhosts([])
   }
 
   useLayoutEffect(() => {
@@ -250,6 +261,20 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
   const handleAttack = () => {
     if (!legalPlay?.valid) return
+
+    // Measure each played card's current hand position *before* dispatch
+    // removes it from the DOM, so the ghost can fly from exactly there.
+    const battleEnd = toRect(battleAreaRef.current)
+    if (battleEnd) {
+      const ghosts = selectedCards
+        .map((c): CardGhost | null => {
+          const start = toRect(handSlotRefs.current.get(c.id) ?? null)
+          return start ? { card: c, start, end: battleEnd, phase: 'start' } : null
+        })
+        .filter((g): g is CardGhost => g !== null)
+      if (ghosts.length > 0) animatePlayGhosts(ghosts)
+    }
+
     dispatch({ type: 'PLAY_CARDS', cardIds: selectedIds })
     setSelectedIds([])
   }
@@ -267,11 +292,11 @@ export function Board({ onMenu }: { onMenu: () => void }) {
     const discardEnd = toRect(discardPileRef.current)
     if (discardEnd) {
       const ghosts = selectedCards
-        .map((c): DiscardGhost | null => {
+        .map((c): CardGhost | null => {
           const start = toRect(handSlotRefs.current.get(c.id) ?? null)
           return start ? { card: c, start, end: discardEnd, phase: 'start' } : null
         })
-        .filter((g): g is DiscardGhost => g !== null)
+        .filter((g): g is CardGhost => g !== null)
       if (ghosts.length > 0) animateDiscardGhosts(ghosts)
     }
 
@@ -423,6 +448,12 @@ export function Board({ onMenu }: { onMenu: () => void }) {
 
       {discardGhosts.map((g) => (
         <div key={g.card.id} className="ghost" style={ghostStyle(g, 0.7)}>
+          <Card card={g.card} size="md" />
+        </div>
+      ))}
+
+      {playGhosts.map((g) => (
+        <div key={g.card.id} className="ghost ghost--play" style={ghostStyle(g, 0.6)}>
           <Card card={g.card} size="md" />
         </div>
       ))}

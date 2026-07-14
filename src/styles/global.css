@@ -36,6 +36,7 @@
     with the CSS transitions/keyframes that use them.
   */
   --anim-card-fly-duration: .8s; /* battle cards -> discard, enemy card -> deck/discard, discard payment -> discard */
+  --anim-card-play-duration: .4s; /* hand cards -> battle area, on attack */
   --anim-draw-duration: .4s; /* new cards entering the hand */
   --anim-flip-duration: 1.2s; /* next-enemy reveal flip */
   --anim-health-countdown-duration: 0.8s; /* enemy health/attack ticking down 1-by-1 */
