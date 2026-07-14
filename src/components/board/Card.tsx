@@ -4,8 +4,6 @@ import { SUIT_ICONS } from '../../game/format'
 import type { Card as CardModel } from '../../game/types'
 import './Card.css'
 
-const RED_SUITS = new Set(['hearts', 'diamonds'])
-
 interface CardProps {
   card?: CardModel
   faceDown?: boolean
@@ -33,7 +31,6 @@ export function Card({
 }: CardProps) {
   const interactive = Boolean(onClick)
   const isBack = faceDown || !card
-  const isRed = card ? RED_SUITS.has(card.suit) : false
   const isEnemyOrigin = card ? isEnemyRank(card.rank) : false
 
   const classes = [
@@ -76,12 +73,8 @@ export function Card({
             <span className="card__corner card__corner--top">{cardValue(card.rank)}</span>
           ) : (
             <>
-              <span className={`card__corner card__corner--top ${isRed ? 'card__corner--red' : ''}`}>
-                {card.rank}
-              </span>
-              <span className={`card__corner card__corner--bottom ${isRed ? 'card__corner--red' : ''}`}>
-                {card.rank}
-              </span>
+              <span className="card__corner card__corner--top">{card.rank}</span>
+              <span className="card__corner card__corner--bottom">{card.rank}</span>
             </>
           )}
           <img className="card__suit" src={SUIT_ICONS[card.suit]} alt={card.suit} />

@@ -121,7 +121,7 @@
   font-family: var(--font-display);
   font-size: 0.95rem;
   line-height: 1;
-  color: var(--color-white);
+  color: #fff;
 }
 
 .card__corner--bottom {
@@ -130,10 +130,6 @@
   right: 6px;
   bottom: 4px;
   transform: rotate(180deg);
-}
-
-.card__corner--red {
-  color: var(--color-text-dim);
 }
 
 .card__suit {
