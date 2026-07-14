@@ -29,6 +29,12 @@ export function WinLoseOverlay({ state, onNewGame }: WinLoseOverlayProps) {
   return (
     <div className="overlay" role="alertdialog" aria-modal="true">
       <div className="overlay__panel">
+        <img
+          className="overlay__image"
+          src={isWin ? '/assets/endgame-imgs/win-img.png' : '/assets/endgame-imgs/defeat-img.png'}
+          alt=""
+          aria-hidden="true"
+        />
         <h2 className="overlay__title">{isWin ? 'Victory' : 'Defeat'}</h2>
         <p className="overlay__subtitle">
           {isWin
